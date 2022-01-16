@@ -18,7 +18,8 @@
                     請先登入
                 </h1>
                 <div class="col-8">
-                    <form id="form" class="form-signin" action="product.html">
+                    <!-- action="product.html" -->
+                    <form id="form" class="form-signin" @submit.prevent="login">
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="username" placeholder="name@example.com"
                                 required autofocus>
@@ -79,7 +80,7 @@
                     axios.post(`${this.url}admin/signin`,user)
                     .then(res => {
                         console.log(res.data)
-                        alert(res.data.message);
+                        // alert(res.data.message);
                         const token = res.data.token
                         const expire = res.data.expire
                         document.cookie = `hexToken=${token}; expires=${new Date(expire)};`;
