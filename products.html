@@ -12,14 +12,14 @@
 <body>
     <div class="container">
         <div id="app" class="container">
-            <button type="button" class="btn btn-dark mt-5" id="checkBtn"
+            <button type="button" class="btn btn-dark mt-5 me-5" id="checkBtn"
             @click="checkLogin"
             >檢查登入狀態</button>
             <button type="button" class="btn btn-dark mt-5" id="checkBtn"
             @click="getProductData"
             >取得資料</button>
             <table class="table mt-4">
-                {{productsData}}
+                <!-- {{productsData}} -->
                 <thead>
                     <tr>
                         <th>產品名稱</th>
@@ -39,15 +39,16 @@
                 </thead>
                 <tbody id="productList" v-for=" item in productsData">
                     <tr>
-                        <td>範例標題</td>
+                        <td>{{item.title}}</td>
                         <td width="120">
-                            範例原價
+                            {{item.origin_price}}
                         </td>
                         <td width="120">
-                            範例價格
+                            {{item.price}}
                         </td>
                         <td width="100">
-                            <span class="">範例啟用狀態</span>
+                            <span class="text-success" v-if="item.is_enabled === 1">啟用</span>
+                            <span class="text-danger" v-else>未啟用</span>
                         </td>
                         <td width="120">
                             <button type="button" class="btn btn-sm btn-outline-danger move deleteBtn"
@@ -106,6 +107,18 @@
                 // this.getProductData()
             }
         }).mount('#app')
+
+//         -MtINS_vztFovljzlJiS:
+// category: "衣服2"
+// content: "這是內容"
+// description: "Sit down please 名設計師設計"
+// id: "-MtINS_vztFovljzlJiS"
+// imageUrl: "https://images.unsplash.com/photo-1573662012516-5cb4399006e7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80"
+// is_enabled: 1
+// origin_price: 100
+// price: 300
+// title: "[賣]動物園造型衣服3"
+// unit: "個"
     </script>
 </body>
 
