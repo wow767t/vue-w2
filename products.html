@@ -41,10 +41,10 @@
                     <tr>
                         <td>{{item.title}}</td>
                         <td width="120">
-                            {{item.origin_price}}
+                            {{item.price}}
                         </td>
                         <td width="120">
-                            {{item.price}}
+                            {{item.origin_price}}
                         </td>
                         <td width="100">
                             <span class="text-success" v-if="item.is_enabled === 1">啟用</span>
@@ -57,7 +57,7 @@
                     </tr>
                 </tbody>
             </table>
-            <p>目前有 <span id="productCount">0</span> 項產品</p>
+            <p>目前有 <span id="productCount">{{productsData.length}}</span> 項產品</p>
         </div>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'
