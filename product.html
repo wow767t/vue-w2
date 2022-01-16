@@ -76,7 +76,7 @@
                     axios.defaults.headers.common['Authorization'] = myCookie;
                     console.log(myCookie)
 
-                    axios.post(`${this.url}v2/api/user/check`)
+                    axios.post(`${this.url}api/user/check`)
                     .then(res => {
                         console.log(res)
                     })
