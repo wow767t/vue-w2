@@ -67,7 +67,8 @@
             data() {
                 return {
                     url: 'https://vue3-course-api.hexschool.io/v2/',
-                    path: 'scott'
+                    path: 'scott',
+                    productsData: []
                 }
             },
             methods: {
@@ -76,6 +77,7 @@
                     axios.defaults.headers.common['Authorization'] = myCookie;
                     console.log(myCookie)
 
+                    // fixed
                     axios.post(`${this.url}api/user/check`)
                     .then(res => {
                         console.log(res)
@@ -83,6 +85,9 @@
                     .catch(err => {
                         console.error(err); 
                     })
+                },
+                getProductData() {
+
                 }
             },
             mounted() {
