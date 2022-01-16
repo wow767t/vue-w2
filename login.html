@@ -84,6 +84,7 @@
                         const token = res.data.token
                         const expire = res.data.expire
                         document.cookie = `hexToken=${token}; expires=${new Date(expire)};`;
+                        window.location  = 'products.html';
                     })
                     .catch(err => {
                         console.dir(err); 
