@@ -12,7 +12,9 @@
 <body>
     <div class="container">
         <div id="app" class="container">
-            <button type="button" class="btn btn-dark mt-5" id="checkBtn">檢查登入狀態</button>
+            <button type="button" class="btn btn-dark mt-5" id="checkBtn"
+            @click="checkLogin"
+            >檢查登入狀態</button>
             <table class="table mt-4">
                 <thead>
                     <tr>
@@ -59,25 +61,34 @@
 
     <script type="module">
         import { createApp } from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.26/vue.esm-browser.min.js'
-        const url = 'https://vue3-course-api.hexschool.io/v2/';
-        const path = 'scott'
-        
-        const checkBtn = document.querySelector('#checkBtn');
-        checkBtn.addEventListener('click', checkLogin)
 
-        function checkLogin() {
-            const myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-            axios.defaults.headers.common['Authorization'] = myCookie;
-            console.log(myCookie)
-        }
 
-        axios.get(`${url}api/${path}/admin/products/all`)
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.error(err);
-            })
+        const app = createApp({
+            data() {
+                return {
+                    url: 'https://vue3-course-api.hexschool.io/v2/',
+                    path: 'scott'
+                }
+            },
+            methods: {
+                checkLogin() {
+                    const myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+                    axios.defaults.headers.common['Authorization'] = myCookie;
+                    console.log(myCookie)
+
+                    axios.post(`${this.url}v2/api/user/check`)
+                    .then(res => {
+                        console.log(res)
+                    })
+                    .catch(err => {
+                        console.error(err); 
+                    })
+                }
+            },
+            mounted() {
+
+            }
+        }).mount('#app')
     </script>
 </body>
 
