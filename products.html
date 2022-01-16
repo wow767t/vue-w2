@@ -80,7 +80,7 @@
                     axios.post(`${this.url}api/user/check`)
                     .then(res => {
                         console.log(res)
-                        alert(res.data.message)
+                        alert(res.data.success)
                     })
                     .catch(err => {
                         console.error(err); 
@@ -90,6 +90,8 @@
                     axios.get(`${this.url}api/${this.path}/admin/products/all`)
                     .then(res => {
                         console.log(res)
+                        this.productsData = res.data
+                        console.log(this.productsData)
                     })
                     .catch(err => {
                         console.error(err); 
