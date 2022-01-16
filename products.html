@@ -15,6 +15,9 @@
             <button type="button" class="btn btn-dark mt-5" id="checkBtn"
             @click="checkLogin"
             >檢查登入狀態</button>
+            <button type="button" class="btn btn-dark mt-5" id="checkBtn"
+            @click="getProductData"
+            >取得資料</button>
             <table class="table mt-4">
                 {{productsData}}
                 <thead>
@@ -76,7 +79,7 @@
                 checkLogin() {
                     const myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
                     axios.defaults.headers.common['Authorization'] = myCookie;
-                    console.log(myCookie)
+                    // console.log(myCookie)
 
                     axios.post(`${this.url}api/user/check`)
                     .then(res => {
@@ -91,16 +94,16 @@
                     axios.get(`${this.url}api/${this.path}/admin/products/all`)
                     .then(res => {
                         console.log(res)
+                        console.log(res.data)
                         this.productsData = res.data
-                        console.log(this.productsData)
                     })
                     .catch(err => {
-                        console.error(err); 
+                        console.dir(err); 
                     })
                 }
             },
             mounted() {
-                this.getProductData()
+                // this.getProductData()
             }
         }).mount('#app')
     </script>
