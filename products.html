@@ -33,7 +33,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="productList">
+                <tbody id="productList" v-for="">
                     <tr>
                         <td>範例標題</td>
                         <td width="120">
@@ -77,21 +77,27 @@
                     axios.defaults.headers.common['Authorization'] = myCookie;
                     console.log(myCookie)
 
-                    // fixed
                     axios.post(`${this.url}api/user/check`)
                     .then(res => {
                         console.log(res)
+                        alert(res.data.message)
                     })
                     .catch(err => {
                         console.error(err); 
                     })
                 },
                 getProductData() {
-
+                    axios.get(`${this.url}api/${this.path}/admin/products/all`)
+                    .then(res => {
+                        console.log(res)
+                    })
+                    .catch(err => {
+                        console.error(err); 
+                    })
                 }
             },
             mounted() {
-
+                getProductData()
             }
         }).mount('#app')
     </script>
