@@ -96,7 +96,7 @@
                     .then(res => {
                         console.log(res)
                         console.log(res.data)
-                        this.productsData = res.data
+                        this.productsData = res.data.products
                     })
                     .catch(err => {
                         console.dir(err); 
