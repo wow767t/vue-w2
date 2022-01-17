@@ -120,10 +120,10 @@
                         .catch(err => {
                             console.dir(err);
                             // - 使用者若無登入直接進入商品頁面，會被導回登入頁面
-                            alert('驗證錯誤請，重新登入')
+                            alert('驗證錯誤，請重新登入')
                             setTimeout(() => {
                                 window.location = 'login.html'
-                            }, 2000);
+                            }, 1000);
                         })
                 },
                 getProductData() {
