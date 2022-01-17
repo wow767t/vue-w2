@@ -62,7 +62,7 @@
             <p>目前有 <span id="productCount">{{productsData.length}}</span> 項產品</p>
             <!-- 測試用 -->
             <button type="button" id="btnD" data-id="0110">
-                刪除
+                刪除 2049
             </button>
         </div>
     </div>
@@ -105,7 +105,7 @@
                         // console.log(res.data)
                         // this.productsData = res.data.products
                         // 轉陣列
-                        let temp = Object.keys(res.data.products);
+                        let temp = Object.values(res.data.products);
                         let newArr = [];
                         temp.forEach(item =>{
                             newArr.push(item)
@@ -133,6 +133,7 @@
             },
             mounted() {
                 // this.getProductData()
+                this.checkLogin()
             }
         }).mount('#app')
 
