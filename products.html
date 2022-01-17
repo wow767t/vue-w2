@@ -112,14 +112,14 @@
                 delItem() {
                     const deleteBtn = document.querySelector('#deleteBtn')
                     const id = deleteBtn.dataset;
-
-                    axios.delete(`${url}api/${path}/admin/product/${id}`)
-                    .then(res => {
-                        console.log(res)
-                    })
-                    .catch(err => {
-                        console.error(err); 
-                    })
+                    console.log(id)
+                    // axios.delete(`${url}api/${path}/admin/product/${id}`)
+                    // .then(res => {
+                    //     console.log(res)
+                    // })
+                    // .catch(err => {
+                    //     console.error(err); 
+                    // })
                 }
             },
             mounted() {
