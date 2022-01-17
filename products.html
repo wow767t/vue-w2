@@ -51,13 +51,19 @@
                             <span class="text-danger" v-else>未啟用</span>
                         </td>
                         <td width="120">
-                            <button type="button" class="btn btn-sm btn-outline-danger move deleteBtn"
-                                data-action="remove" data-id=""> 刪除 </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger move deleteBtn" id="deleteBtn"
+                                data-action="remove" v:bind=data-id="{{item.id}}"
+                                @click="delItem"
+                                > 刪除 </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <p>目前有 <span id="productCount">{{productsData.length}}</span> 項產品</p>
+            <!-- 測試用 -->
+            <button type="button" id="btnD" data-id="0110">
+                刪除
+            </button>
         </div>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'
@@ -73,7 +79,8 @@
                 return {
                     url: 'https://vue3-course-api.hexschool.io/v2/',
                     path: 'scott',
-                    productsData: {}
+                    productsData: {},
+
                 }
             },
             methods: {
@@ -101,12 +108,29 @@
                     .catch(err => {
                         console.dir(err); 
                     })
+                },
+                delItem() {
+                    const deleteBtn = document.querySelector('#deleteBtn')
+                    const id = deleteBtn.dataset;
+
+                    axios.delete(`${url}api/${path}/admin/product/${id}`)
+                    .then(res => {
+                        console.log(res)
+                    })
+                    .catch(err => {
+                        console.error(err); 
+                    })
                 }
             },
             mounted() {
                 // this.getProductData()
             }
         }).mount('#app')
+
+        // 測試用
+        const btnD = document.querySelector('#btnD');
+        console.log(btnD)
+        console.log(btnD.dataset)
 
 //         -MtINS_vztFovljzlJiS:
 // category: "衣服2"
