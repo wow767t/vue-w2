@@ -12,7 +12,7 @@
 <body>
     <div id="app" class="container">
         <!-- <button type="button" class="btn btn-dark mt-5 me-5" id="checkBtn" @click="checkLogin">檢查登入狀態</button> -->
-        <button type="button" class="btn btn-dark mt-5" id="checkBtn" @click="getProductData">取得資料</button>
+        <!-- <button type="button" class="btn btn-dark mt-5" id="checkBtn" @click="getProductData">取得資料</button> -->
         <div class="col-12 ">
             <table class="table mt-4">
                 <!-- {{productsData}} -->
@@ -86,7 +86,7 @@
             <p v-else>請選擇一個商品查看</p>
         </div>
 
-        git timestamp 2313
+        <!-- git timestamp 2313 -->
 
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'
@@ -159,9 +159,7 @@
                             console.error(err);
                         })
                 },
-                productInfo() {
-
-                }
+                
             },
             mounted() {
                 this.checkLogin(),
