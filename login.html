@@ -85,6 +85,7 @@
                     })
                     .catch(err => {
                         console.dir(err); 
+                        alert(err.data.message)
                     })
                 }
             },
@@ -92,7 +93,7 @@
             // this.init()
             }
         }).mount('#app')
-        
+
     </script>
 </body>
 
