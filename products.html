@@ -11,7 +11,7 @@
 
 <body>
     <div id="app" class="container">
-        <button type="button" class="btn btn-dark mt-5 me-5" id="checkBtn" @click="checkLogin">檢查登入狀態</button>
+        <!-- <button type="button" class="btn btn-dark mt-5 me-5" id="checkBtn" @click="checkLogin">檢查登入狀態</button> -->
         <button type="button" class="btn btn-dark mt-5" id="checkBtn" @click="getProductData">取得資料</button>
         <div class="col-12 ">
             <table class="table mt-4">
@@ -67,7 +67,7 @@
 
 
         <!-- 詳細資料 -->
-        <div class="col-6 border">
+        <div class="col-6 ">
             <template v-if="temp.title">
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
@@ -78,7 +78,6 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{temp.title}}</h5>
                                 <p class="card-text">{{temp.description}}</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                         </div>
                     </div>
@@ -87,7 +86,7 @@
             <p v-else>請選擇一個商品查看</p>
         </div>
 
-        git timestamp 2306
+        git timestamp 2313
 
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'
@@ -122,10 +121,10 @@
                         .catch(err => {
                             console.dir(err);
                             // - 使用者若無登入直接進入商品頁面，會被導回登入頁面
-                            // alert('驗證錯誤請，重新登入')
-                            // setTimeout(() => {
-                            //     window.location = 'login.html'
-                            // }, 2000);
+                            alert('驗證錯誤請，重新登入')
+                            setTimeout(() => {
+                                window.location = 'login.html'
+                            }, 2000);
                         })
                 },
                 getProductData() {
@@ -165,8 +164,8 @@
                 }
             },
             mounted() {
-                // this.getProductData()
-                this.checkLogin()
+                this.checkLogin(),
+                this.getProductData()
             }
         }).mount('#app')
 
