@@ -10,83 +10,85 @@
 </head>
 
 <body>
-    <div class="container">
-        <div id="app" class="container">
-            <button type="button" class="btn btn-dark mt-5 me-5" id="checkBtn" @click="checkLogin">檢查登入狀態</button>
-            <button type="button" class="btn btn-dark mt-5" id="checkBtn" @click="getProductData">取得資料</button>
-            <div>
-                <table class="table mt-4">
-                    <!-- {{productsData}} -->
-                    <thead>
-                        <tr>
-                            <th>產品名稱</th>
-                            <th width="120">
-                                詳細資訊
-                            </th>
-                            <!--  -->
-                            <th width="120">
-                                原價
-                            </th>
-                            <th width="120">
-                                售價
-                            </th>
-                            <th width="150">
-                                是否啟用
-                            </th>
-                            <th width="120">
-                                刪除
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="productList" v-for=" item in productsData">
-                        <tr>
-                            <td>{{item.title}}</td>
-                            <td>
-                                <button type="button" class="btn btn-sm btn-outline-dark" @click="temp = item">
-                                    詳細資訊</button>
-                            </td>
-                            <td width="120">
-                                {{item.price}}
-                            </td>
-                            <td width="120">
-                                {{item.origin_price}}
-                            </td>
-                            <td width="100">
-                                <span class="text-success" v-if="item.is_enabled === 1">啟用</span>
-                                <span class="text-danger" v-else>未啟用</span>
-                            </td>
-                            <td width="120">
-                                <button type="button" class="btn btn-sm btn-outline-danger move deleteBtn"
-                                    id="deleteBtn" data-action="remove" v:bind=data-id="{{item.id}}" @click="delItem">
-                                    刪除 </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p>目前有 <span id="productCount">{{productsData.length}}</span> 項產品</p>
-                <!-- 詳細資料 -->
+    <div id="app" class="container">
+        <button type="button" class="btn btn-dark mt-5 me-5" id="checkBtn" @click="checkLogin">檢查登入狀態</button>
+        <button type="button" class="btn btn-dark mt-5" id="checkBtn" @click="getProductData">取得資料</button>
+        <div class="col-12 ">
+            <table class="table mt-4">
+                <!-- {{productsData}} -->
+                <thead>
+                    <tr>
+                        <th>產品名稱</th>
+                        <th width="120">
+                            詳細資訊
+                        </th>
+                        <!--  -->
+                        <th width="120">
+                            原價
+                        </th>
+                        <th width="120">
+                            售價
+                        </th>
+                        <th width="150">
+                            是否啟用
+                        </th>
+                        <th width="120">
+                            刪除
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="productList" v-for=" item in productsData">
+                    <tr>
+                        <td>{{item.title}}</td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-outline-dark" @click="temp = item">
+                                詳細資訊</button>
+                        </td>
+                        <td width="120">
+                            {{item.price}}
+                        </td>
+                        <td width="120">
+                            {{item.origin_price}}
+                        </td>
+                        <td width="100">
+                            <span class="text-success" v-if="item.is_enabled === 1">啟用</span>
+                            <span class="text-danger" v-else>未啟用</span>
+                        </td>
+                        <td width="120">
+                            <button type="button" class="btn btn-sm btn-outline-danger move deleteBtn" id="deleteBtn"
+                                data-action="remove" v:bind=data-id="{{item.id}}" @click="delItem">
+                                刪除 </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>目前有 <span id="productCount">{{productsData.length}}</span> 項產品</p>
+        </div>
 
-                <template v-if="temp.title">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="..." class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural
-                                        lead-in to
-                                        additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                </div>
+
+        <!-- 詳細資料 -->
+        <div class="col-6 border">
+            <template v-if="temp.title">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img :src="temp.imageUrl" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{temp.title}}</h5>
+                                <p class="card-text">{{temp.description}}</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                         </div>
                     </div>
-                </template>
-            </div>
-            git timestamp 2138
+                </div>
+            </template>
+            <p v-else>請選擇一個商品查看</p>
         </div>
+
+        git timestamp 2306
+
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'
         integrity='sha512-Xk3wWei2TGrsh9kDSBKUMIjw/86sLUvhtnv9f7fOuIwhhiUTKz8szkWkzHthrM5Bb3Bu9idSzkxOrkzhcneuiw=='
@@ -102,6 +104,7 @@
                     url: 'https://vue3-course-api.hexschool.io/v2/',
                     path: 'scott',
                     productsData: [],
+                    temp: []
 
                 }
             },
@@ -119,10 +122,10 @@
                         .catch(err => {
                             console.dir(err);
                             // - 使用者若無登入直接進入商品頁面，會被導回登入頁面
-                            alert('驗證錯誤請，重新登入')
-                            setTimeout(() => {
-                                window.location = 'login.html'
-                            }, 2000);
+                            // alert('驗證錯誤請，重新登入')
+                            // setTimeout(() => {
+                            //     window.location = 'login.html'
+                            // }, 2000);
                         })
                 },
                 getProductData() {
