@@ -11,7 +11,7 @@
 
 <body>
     <div class="container">
-        <div id="app" class="container">
+        <div id="app" class="container" v-for=" item in productsData">
             <button type="button" class="btn btn-dark mt-5 me-5" id="checkBtn" @click="checkLogin">檢查登入狀態</button>
             <button type="button" class="btn btn-dark mt-5" id="checkBtn" @click="getProductData">取得資料</button>
             <table class="table mt-4">
@@ -37,7 +37,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="productList" v-for=" item in productsData">
+                <tbody id="productList" >
                     <tr>
                         <td>{{item.title}}</td>
                         <td>
@@ -64,6 +64,9 @@
                 </tbody>
             </table>
             <p>目前有 <span id="productCount">{{productsData.length}}</span> 項產品</p>
+            <!-- 詳細資料 -->
+            
+            <template>
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">
@@ -79,7 +82,8 @@
                     </div>
                 </div>
             </div>
-                git timestamp 2109
+        </template>
+                git timestamp 2123
         </div>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'
@@ -113,7 +117,10 @@
                         .catch(err => {
                             console.dir(err);
                             // - 使用者若無登入直接進入商品頁面，會被導回登入頁面
-                            window.location = 'login.html';
+                            alert('驗證錯誤請，重新登入')
+                            setTimeout(() => {
+                                window.location = 'login.html'
+                            }, 5000);
                         })
                 },
                 getProductData() {
