@@ -12,17 +12,17 @@
 <body>
     <div class="container">
         <div id="app" class="container">
-            <button type="button" class="btn btn-dark mt-5 me-5" id="checkBtn"
-            @click="checkLogin"
-            >檢查登入狀態</button>
-            <button type="button" class="btn btn-dark mt-5" id="checkBtn"
-            @click="getProductData"
-            >取得資料</button>
+            <button type="button" class="btn btn-dark mt-5 me-5" id="checkBtn" @click="checkLogin">檢查登入狀態</button>
+            <button type="button" class="btn btn-dark mt-5" id="checkBtn" @click="getProductData">取得資料</button>
             <table class="table mt-4">
                 <!-- {{productsData}} -->
                 <thead>
                     <tr>
                         <th>產品名稱</th>
+                        <th width="120">
+                            詳細資訊
+                        </th>
+                        <!--  -->
                         <th width="120">
                             原價
                         </th>
@@ -40,6 +40,12 @@
                 <tbody id="productList" v-for=" item in productsData">
                     <tr>
                         <td>{{item.title}}</td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-outline-dark"
+                            @click="productInfo"
+                            >
+                            詳細資訊</button>
+                        </td>
                         <td width="120">
                             {{item.price}}
                         </td>
@@ -52,18 +58,28 @@
                         </td>
                         <td width="120">
                             <button type="button" class="btn btn-sm btn-outline-danger move deleteBtn" id="deleteBtn"
-                                data-action="remove" v:bind=data-id="{{item.id}}"
-                                @click="delItem"
-                                > 刪除 </button>
+                                data-action="remove" v:bind=data-id="{{item.id}}" @click="delItem"> 刪除 </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <p>目前有 <span id="productCount">{{productsData.length}}</span> 項產品</p>
-            <!-- 測試用 -->
-            <button type="button" id="btnD" data-id="0110">
-                刪除 2049
-            </button>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="..." class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                                additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                git timestamp 2109
         </div>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'
@@ -79,7 +95,7 @@
                 return {
                     url: 'https://vue3-course-api.hexschool.io/v2/',
                     path: 'scott',
-                    productsData: [], 
+                    productsData: [],
 
                 }
             },
@@ -90,45 +106,50 @@
                     // console.log(myCookie)
 
                     axios.post(`${this.url}api/user/check`)
-                    .then(res => {
-                        console.log(res)
-                        alert(res.data.success)
-                    })
-                    .catch(err => {
-                        console.error(err); 
-                    })
+                        .then(res => {
+                            console.log(res)
+                            // alert(res.data.success)
+                        })
+                        .catch(err => {
+                            console.dir(err);
+                            // - 使用者若無登入直接進入商品頁面，會被導回登入頁面
+                            window.location = 'login.html';
+                        })
                 },
                 getProductData() {
                     axios.get(`${this.url}api/${this.path}/admin/products/all`)
-                    .then(res => {
-                        console.log(res)
-                        // console.log(res.data)
-                        // this.productsData = res.data.products
-                        // 轉陣列
-                        let temp = Object.values(res.data.products);
-                        let newArr = [];
-                        temp.forEach(item =>{
-                            newArr.push(item)
-                        })
-                        this.productsData = newArr
-                        console.log(this.productsData)
+                        .then(res => {
+                            console.log(res)
+                            // console.log(res.data)
+                            // this.productsData = res.data.products
+                            // 轉陣列
+                            let temp = Object.values(res.data.products);
+                            let newArr = [];
+                            temp.forEach(item => {
+                                newArr.push(item)
+                            })
+                            this.productsData = newArr
+                            console.log(this.productsData)
 
-                    })
-                    .catch(err => {
-                        console.dir(err); 
-                    })
+                        })
+                        .catch(err => {
+                            console.dir(err);
+                        })
                 },
                 delItem() {
                     const deleteBtn = document.querySelector('#deleteBtn')
                     const id = deleteBtn.dataset;
                     console.log(id)
                     axios.delete(`${this.url}api/${this.path}/admin/product/${id}`)
-                    .then(res => {
-                        console.log(res)
-                    })
-                    .catch(err => {
-                        console.error(err); 
-                    })
+                        .then(res => {
+                            console.log(res)
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        })
+                },
+                productInfo(){
+
                 }
             },
             mounted() {
