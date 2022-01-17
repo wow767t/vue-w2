@@ -11,79 +11,81 @@
 
 <body>
     <div class="container">
-        <div id="app" class="container" v-for=" item in productsData">
+        <div id="app" class="container">
             <button type="button" class="btn btn-dark mt-5 me-5" id="checkBtn" @click="checkLogin">檢查登入狀態</button>
             <button type="button" class="btn btn-dark mt-5" id="checkBtn" @click="getProductData">取得資料</button>
-            <table class="table mt-4">
-                <!-- {{productsData}} -->
-                <thead>
-                    <tr>
-                        <th>產品名稱</th>
-                        <th width="120">
-                            詳細資訊
-                        </th>
-                        <!--  -->
-                        <th width="120">
-                            原價
-                        </th>
-                        <th width="120">
-                            售價
-                        </th>
-                        <th width="150">
-                            是否啟用
-                        </th>
-                        <th width="120">
-                            刪除
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="productList" >
-                    <tr>
-                        <td>{{item.title}}</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-outline-dark"
-                            @click="productInfo"
-                            >
-                            詳細資訊</button>
-                        </td>
-                        <td width="120">
-                            {{item.price}}
-                        </td>
-                        <td width="120">
-                            {{item.origin_price}}
-                        </td>
-                        <td width="100">
-                            <span class="text-success" v-if="item.is_enabled === 1">啟用</span>
-                            <span class="text-danger" v-else>未啟用</span>
-                        </td>
-                        <td width="120">
-                            <button type="button" class="btn btn-sm btn-outline-danger move deleteBtn" id="deleteBtn"
-                                data-action="remove" v:bind=data-id="{{item.id}}" @click="delItem"> 刪除 </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <p>目前有 <span id="productCount">{{productsData.length}}</span> 項產品</p>
-            <!-- 詳細資料 -->
-            
-            <template>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="..." class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <div>
+                <table class="table mt-4">
+                    <!-- {{productsData}} -->
+                    <thead>
+                        <tr>
+                            <th>產品名稱</th>
+                            <th width="120">
+                                詳細資訊
+                            </th>
+                            <!--  -->
+                            <th width="120">
+                                原價
+                            </th>
+                            <th width="120">
+                                售價
+                            </th>
+                            <th width="150">
+                                是否啟用
+                            </th>
+                            <th width="120">
+                                刪除
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="productList" v-for=" item in productsData">
+                        <tr>
+                            <td>{{item.title}}</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-outline-dark" @click="temp = item">
+                                    詳細資訊</button>
+                            </td>
+                            <td width="120">
+                                {{item.price}}
+                            </td>
+                            <td width="120">
+                                {{item.origin_price}}
+                            </td>
+                            <td width="100">
+                                <span class="text-success" v-if="item.is_enabled === 1">啟用</span>
+                                <span class="text-danger" v-else>未啟用</span>
+                            </td>
+                            <td width="120">
+                                <button type="button" class="btn btn-sm btn-outline-danger move deleteBtn"
+                                    id="deleteBtn" data-action="remove" v:bind=data-id="{{item.id}}" @click="delItem">
+                                    刪除 </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>目前有 <span id="productCount">{{productsData.length}}</span> 項產品</p>
+                <!-- 詳細資料 -->
+
+                <template v-if="temp.title">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="..." class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural
+                                        lead-in to
+                                        additional content. This content is a little bit longer.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </template>
             </div>
-        </template>
-                git timestamp 2123
+            git timestamp 2138
         </div>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'
@@ -120,7 +122,7 @@
                             alert('驗證錯誤請，重新登入')
                             setTimeout(() => {
                                 window.location = 'login.html'
-                            }, 5000);
+                            }, 2000);
                         })
                 },
                 getProductData() {
@@ -155,7 +157,7 @@
                             console.error(err);
                         })
                 },
-                productInfo(){
+                productInfo() {
 
                 }
             },
